@@ -175,7 +175,7 @@ export default function Component() {
   const [graphProgress, setGraphProgress] = useState(0)
   const [isSliding, setIsSliding] = useState(false)
 
-  const titleText = "Welcome to PassiveWealth"
+  const titleText = "Welcome to Onward Accounting"
   const subtitleText = "Your Journey to Financial Freedom Starts Here"
   const introText = "Ready to unlock the power of passive income? Our platform is designed for ambitious individuals who want to build wealth while reclaiming their time. Let's begin by exploring your financial aspirations and crafting your path to success!"
 
@@ -205,17 +205,17 @@ export default function Component() {
 
   return (
     <div className={`fixed inset-0 bg-gradient-to-b from-sky-100 to-white flex items-center justify-center transition-all duration-2000 ease-in-out ${isSliding ? '-translate-y-full' : ''}`}>
-      <div className={`max-w-2xl text-center transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="mb-8 flex justify-center">
-          <GraphIcon progress={graphProgress} size={300} />
+      <div className={`w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[60%] xl:max-w-2xl px-4 sm:px-6 text-center transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className="mb-4 sm:mb-8 flex justify-center">
+          <GraphIcon progress={graphProgress} size={200} />
         </div>
-        <h1 className="text-5xl font-bold mb-4 text-sky-600 transition-all duration-1000 ease-in-out delay-500">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-4 text-sky-600 transition-all duration-1000 ease-in-out delay-500">
           {titleText}
         </h1>
-        <h2 className="text-2xl font-semibold mb-6 text-sky-500 transition-all duration-1000 ease-in-out delay-700">
+        <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-6 text-sky-500 transition-all duration-1000 ease-in-out delay-700">
           {subtitleText}
         </h2>
-        <p className="text-xl mb-8 text-gray-700 transition-all duration-1000 ease-in-out delay-900">
+        <p className="text-base sm:text-lg md:text-xl mb-4 sm:mb-8 text-gray-700 transition-all duration-1000 ease-in-out delay-900">
           {introText}
         </p>
       </div>

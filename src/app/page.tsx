@@ -10,7 +10,6 @@ import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import IntroPage from '@/components/intropage'
 
-// Add the font import
 const fontUrl = "https://use.typekit.net/gcd4kuc.css";
 
 const NavItem = ({ icon, text, active = false }: { icon: React.ReactNode; text: string; active?: boolean }) => (
@@ -22,7 +21,7 @@ const NavItem = ({ icon, text, active = false }: { icon: React.ReactNode; text: 
 
 const FeatureCard = ({ icon, title, description, grey = false }: { icon: React.ReactNode; title: string; description: string; grey?: boolean }) => (
   <Card className={`${grey ? 'bg-gray-100 shadow-none border-0' : 'bg-white hover:shadow-lg'} transition-shadow duration-300`}>
-    <CardContent className="p-4 sm:p-6">
+    <CardContent className="p-4">
       <div className="mb-4 text-sky-600">{icon}</div>
       <h3 className="text-lg font-semibold mb-2">{title}</h3>
       <p className="text-gray-600 text-sm">{description}</p>
@@ -48,15 +47,14 @@ export default function Dashboard() {
     <>
       <IntroPage />
       <div className="min-h-screen bg-white" style={{ fontFamily: 'proxima-nova, sans-serif' }}>
-        {/* Add the font stylesheet */}
         <link rel="stylesheet" href={fontUrl} />
         
         <header className="border-b">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="flex items-center justify-between h-20 mt-4">
+            <div className="flex items-center justify-between h-16 sm:h-20">
               <div className="flex items-center space-x-4">
-                <span className="text-lg sm:text-xl font-bold text-sky-600">Onboard Accounting</span>
-                <nav className="hidden md:flex space-x-2">
+                <span className="text-lg font-bold text-sky-600">Onward Accounting</span>
+                <nav className="hidden lg:flex space-x-2">
                   <NavItem icon={<Home className="w-5 h-5" />} text="Home" active />
                   <NavItem icon={<TrendingUp className="w-5 h-5" />} text="Services" />
                   <NavItem icon={<Activity className="w-5 h-5" />} text="Reports" />
@@ -65,25 +63,25 @@ export default function Dashboard() {
                 </nav>
               </div>
               <div className="flex items-center space-x-4">
-                <div className="hidden sm:block relative">
+                <div className="hidden md:block relative">
                   <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <Input
                     type="text"
                     placeholder="Search services or resources"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 w-64 rounded-full"
+                    className="pl-10 w-48 lg:w-64 rounded-full"
                   />
                 </div>
-                <Button variant="ghost" size="icon" className="hidden sm:inline-flex">
+                <Button variant="ghost" size="icon" className="hidden md:inline-flex">
                   <Moon className="w-5 h-5" />
                 </Button>
-                <Button variant="ghost" size="icon" className="hidden sm:inline-flex">
+                <Button variant="ghost" size="icon" className="hidden md:inline-flex">
                   <User className="w-5 h-5" />
                 </Button>
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon" className="md:hidden">
+                    <Button variant="ghost" size="icon" className="lg:hidden">
                       <Menu className="w-5 h-5" />
                     </Button>
                   </SheetTrigger>
@@ -102,22 +100,22 @@ export default function Dashboard() {
           </div>
         </header>
 
-        <main className="max-w-7xl mx-auto px-4 py-6 sm:py-8">
-          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-            <div className="md:col-span-2">
-              <section className="mb-8 sm:mb-12">
-                <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Streamline Your Accounting Process</h2>
-                <p className="text-gray-600 mb-6 sm:mb-8">
+        <main className="max-w-7xl mx-auto px-4 py-6">
+          <div className="grid lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <section className="mb-8">
+                <h2 className="text-xl font-bold mb-4">Streamline Your Accounting Process</h2>
+                <p className="text-gray-600 mb-6">
                   Discover how Onboard Accounting can help optimize your financial operations and drive your business forward.
                 </p>
-                <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid sm:grid-cols-2 gap-4">
                   <FeatureCard
-                    icon={<BookOpen className="w-10 h-10 sm:w-12 sm:h-12" />}
+                    icon={<BookOpen className="w-10 h-10" />}
                     title="Comprehensive Bookkeeping"
                     description="Access detailed financial records and reports to keep your business on track."
                   />
                   <FeatureCard
-                    icon={<Users className="w-10 h-10 sm:w-12 sm:h-12" />}
+                    icon={<Users className="w-10 h-10" />}
                     title="Tax Planning & Preparation"
                     description="Expert guidance to optimize your tax strategy and ensure compliance."
                   />
@@ -125,22 +123,22 @@ export default function Dashboard() {
               </section>
 
               <section>
-                <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Optimize Your Financial Management</h2>
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                <h2 className="text-xl font-bold mb-4">Optimize Your Financial Management</h2>
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
                   <FeatureCard
-                    icon={<Play className="w-8 h-8 sm:w-10 sm:h-10" />}
+                    icon={<Play className="w-8 h-8" />}
                     title="Financial Webinars"
                     description="Attend live Q&A sessions and webinars with accounting experts."
                     grey
                   />
                   <FeatureCard
-                    icon={<BarChart2 className="w-8 h-8 sm:w-10 sm:h-10" />}
+                    icon={<BarChart2 className="w-8 h-8" />}
                     title="Performance Analytics"
                     description="Monitor and optimize your financial performance with our analytics tools."
                     grey
                   />
                   <FeatureCard
-                    icon={<TrendingUp className="w-8 h-8 sm:w-10 sm:h-10" />}
+                    icon={<TrendingUp className="w-8 h-8" />}
                     title="Growth Strategies"
                     description="Evaluate and compare different financial strategies for your business growth."
                     grey
@@ -149,9 +147,9 @@ export default function Dashboard() {
               </section>
             </div>
 
-            <div className="space-y-6 sm:space-y-8">
+            <div className="space-y-6">
               <section>
-                <h2 className="text-lg sm:text-xl font-bold mb-4">Quick Links</h2>
+                <h2 className="text-lg font-bold mb-4">Quick Links</h2>
                 <div className="space-y-2">
                   <HelpCard
                     title="Accounting Basics"
@@ -168,8 +166,8 @@ export default function Dashboard() {
                 </div>
               </section>
 
-              <section className="bg-sky-50 p-4 sm:p-6 rounded-lg">
-                <h2 className="text-lg sm:text-xl font-bold mb-4">Book a Consultation</h2>
+              <section className="bg-sky-50 p-4 rounded-lg">
+                <h2 className="text-lg font-bold mb-4">Book a Consultation</h2>
                 <p className="text-gray-600 text-sm mb-4">
                   Get personalized advice from our accounting experts to optimize your financial strategies.
                 </p>
@@ -202,7 +200,7 @@ export default function Dashboard() {
 
               <section>
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-lg sm:text-xl font-bold">Financial Dashboard</h2>
+                  <h2 className="text-lg font-bold">Financial Dashboard</h2>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">
                   Monitor your financial health and track your business growth with our interactive dashboard.
