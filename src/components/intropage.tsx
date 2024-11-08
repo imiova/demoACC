@@ -9,9 +9,9 @@ interface GraphIconProps {
 
 const GraphIcon: React.FC<GraphIconProps> = ({ 
   progress, 
-  size = 100 
+  size = 300 
 }) => {
-  const barHeights = [60, 75, 45, 65, 85] // Percentage heights of bars
+  const barHeights = [60, 75, 45, 65, 85]
   const numBars = barHeights.length
   const radius = size / 2
   const strokeWidth = 12
@@ -24,8 +24,10 @@ const GraphIcon: React.FC<GraphIconProps> = ({
   const adjustedBarWidth = barWidth - barGap
   
   const visibleBars = Math.ceil((progress / 100) * numBars)
-  const lineProgress = progress // Changed to match overall progress
+  const lineProgress = progress
   
+  const innerCircleRadius = circleRadius - 20 // Even thicker inner circle
+
   const getBarCoordinates = (index: number, height: number) => {
     const x = centerX - circleRadius + 14 + index * barWidth
     const y = centerY + circleRadius - 10 - (height / 100) * (2 * circleRadius - 20)
@@ -38,7 +40,6 @@ const GraphIcon: React.FC<GraphIconProps> = ({
     const offsetX = progressFactor * 35
     const offsetY = Math.sin(progressFactor * Math.PI) * 15
     
-    // Extend the line on the left side
     const leftExtension = index === 0 ? -15 : 0
     
     return { 
@@ -86,6 +87,9 @@ const GraphIcon: React.FC<GraphIconProps> = ({
         <clipPath id="circleClip">
           <circle cx={centerX} cy={centerY} r={circleRadius} />
         </clipPath>
+        <clipPath id="innerCircleClip">
+          <circle cx={centerX} cy={centerY} r={innerCircleRadius} />
+        </clipPath>
       </defs>
       
       {/* Circle background */}
@@ -114,25 +118,27 @@ const GraphIcon: React.FC<GraphIconProps> = ({
       />
       
       <g clipPath="url(#circleClip)">
-        {barHeights.map((height, i) => {
-          const { x, y } = getBarCoordinates(i, height)
-          return (
-            <rect
-              key={i}
-              x={x}
-              y={y}
-              width={adjustedBarWidth}
-              height={(height / 100) * (2 * circleRadius - 20)}
-              fill={i < visibleBars ? "#1e293b" : "transparent"}
-              className="transition-all duration-300"
-              style={{
-                opacity: i < visibleBars ? 1 : 0,
-                transform: `scaleY(${i < visibleBars ? 1 : 0})`,
-                transformOrigin: "bottom"
-              }}
-            />
-          )
-        })}
+        <g clipPath="url(#innerCircleClip)">
+          {barHeights.map((height, i) => {
+            const { x, y } = getBarCoordinates(i, height)
+            return (
+              <rect
+                key={i}
+                x={x}
+                y={y}
+                width={adjustedBarWidth}
+                height={(height / 100) * (2 * circleRadius - 20)}
+                fill={i < visibleBars ? "#1e293b" : "transparent"}
+                className="transition-all duration-300"
+                style={{
+                  opacity: i < visibleBars ? 1 : 0,
+                  transform: `scaleY(${i < visibleBars ? 1 : 0})`,
+                  transformOrigin: "bottom"
+                }}
+              />
+            )
+          })}
+        </g>
       </g>
       
       {lineProgress > 0 && (
@@ -188,7 +194,7 @@ export default function Component() {
 
     const slideTimer = setTimeout(() => {
       setIsSliding(true)
-    }, 3000) // Slide up after 3 seconds
+    }, 5000) // Increased delay to 5 seconds before sliding up
 
     return () => {
       clearTimeout(visibilityTimer)
@@ -198,7 +204,7 @@ export default function Component() {
   }, [])
 
   return (
-    <div className={`fixed inset-0 bg-gradient-to-b from-sky-100 to-white flex items-center justify-center transition-all duration-1000 ease-in-out ${isSliding ? '-translate-y-full' : ''}`}>
+    <div className={`fixed inset-0 bg-gradient-to-b from-sky-100 to-white flex items-center justify-center transition-all duration-2000 ease-in-out ${isSliding ? '-translate-y-full' : ''}`}>
       <div className={`max-w-2xl text-center transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="mb-8 flex justify-center">
           <GraphIcon progress={graphProgress} size={300} />
