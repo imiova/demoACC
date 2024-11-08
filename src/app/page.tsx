@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Home, TrendingUp, Activity, FileText, DollarSign, Search, Moon, User, ArrowRight, ExternalLink, BookOpen, Calendar, Play, Users, BarChart2, Menu } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog"
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import IntroPage from '@/components/intro-page'
+import IntroPage from '@/components/intropage'
 
 // Add the font import
 const fontUrl = "https://use.typekit.net/gcd4kuc.css";
@@ -43,21 +43,11 @@ const HelpCard = ({ title, description, icon }: { title: string; description: st
 export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
-  const [showIntro, setShowIntro] = useState(true)
-  const [fadeOut, setFadeOut] = useState(false)
-
-  useEffect(() => {
-    if (!showIntro) {
-      setFadeOut(true)
-      const timer = setTimeout(() => setFadeOut(false), 1000)
-      return () => clearTimeout(timer)
-    }
-  }, [showIntro])
 
   return (
     <>
-      {showIntro && <IntroPage onComplete={() => setShowIntro(false)} />}
-      <div className={`min-h-screen bg-white transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'}`} style={{ fontFamily: 'proxima-nova, sans-serif' }}>
+      <IntroPage />
+      <div className="min-h-screen bg-white" style={{ fontFamily: 'proxima-nova, sans-serif' }}>
         {/* Add the font stylesheet */}
         <link rel="stylesheet" href={fontUrl} />
         

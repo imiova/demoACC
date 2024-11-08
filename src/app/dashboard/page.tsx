@@ -39,7 +39,7 @@ const HelpCard = ({ title, description, icon }: { title: string; description: st
   </div>
 )
 
-export default function Dashboard() {
+export default function Page() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
 
