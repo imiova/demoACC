@@ -24,8 +24,8 @@ const GraphIcon: React.FC<GraphIconProps> = ({
   const adjustedBarWidth = barWidth - barGap
   
   const visibleBars = Math.ceil((progress / 100) * numBars)
-  const lineProgress = progress // Changed to match overall progress
-  
+  const lineProgress = progress
+
   const getBarCoordinates = (index: number, height: number) => {
     const x = centerX - circleRadius + 14 + index * barWidth
     const y = centerY + circleRadius - 10 - (height / 100) * (2 * circleRadius - 20)
@@ -37,8 +37,6 @@ const GraphIcon: React.FC<GraphIconProps> = ({
     const progressFactor = index / (numBars - 1)
     const offsetX = progressFactor * 35
     const offsetY = Math.sin(progressFactor * Math.PI) * 15
-    
-    // Extend the line on the left side
     const leftExtension = index === 0 ? -15 : 0
     
     return { 
@@ -48,7 +46,7 @@ const GraphIcon: React.FC<GraphIconProps> = ({
   }
 
   const linePoints = barHeights
-    .slice(0, Math.ceil((lineProgress / 100) * numBars))
+    .slice(0, visibleBars)
     .map((height, i) => {
       const { x, y } = getLineCoordinates(i, height)
       return `${x},${y}`
@@ -58,7 +56,7 @@ const GraphIcon: React.FC<GraphIconProps> = ({
   const linePath = linePoints ? "M" + linePoints : ""
 
   // Calculate arrow coordinates
-  const lastIndex = Math.ceil((lineProgress / 100) * numBars) - 1
+  const lastIndex = visibleBars - 1
   const { x: x2, y: y2 } = getLineCoordinates(lastIndex, barHeights[lastIndex])
 
   const angle = lastIndex > 0 
